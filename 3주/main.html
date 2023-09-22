@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="total" >
+        <div id="top">
+            <form id="login-form">
+                <input type="text" name="username" id="username_field" placeholder="id">
+                <input type="text" name="password" id="password_field" placeholder="password">
+                <input value="LOGIN" type="submit" name="login" id="login_button">
+            </form>
+            <form id="logout-form">
+                <img src="cat.jpg" alt="">
+                <b>konic3</b>
+                <input value="LOGOUT" type="submit" name="logout" id="login_button">
+            </form>
+        </div>
+        <div id="menu">
+            <button class="first" type="button" onclick="div1btn()">1</button>
+            <button class="second" type="button" onclick="div2btn()">2</button>
+            <button class="third" type="button" onclick="div3btn()">3</button>          
+        </div>
+        <div id="textbox">
+            <div class="text text1">               
+                <p>202227045</p>
+                <p>김성중</p>
+            </div>
+            <div class="text text2">               
+                <p>히어로즈오브더스톰</p>
+                <p>지금가입시하스스톤</p>
+                <p>카드뒷면100%증정</p>
+            </div>
+            <div class="text text3">               
+                <p>저장되었습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var text1 = 1;
+        var text2 = 2;
+        var text3 = 3;
+        var lastText;
+        var lastPosition;
+        var tempText;
+        var btn1 = document.getElementsByClassName("text")[0];
+        var btn2 = document.getElementsByClassName("text")[1];
+        var btn3 = document.getElementsByClassName("text")[2];
+        
+        function div1btn() {
+            showText(text1, 1);
+            lastText = text1;
+        }
+        
+        function div2btn() {
+            showText(text2, 2);
+            lastText = text2;
+        }
+        
+        function div3btn() {
+            showText(text3, 3);
+            lastText = text3;
+        }
+        
+        //버튼 교환 함수
+        function showText(textNum, currentPosition) {
+            if (textNum == 1) {
+                btn1.style.display = 'block';
+                btn2.style.display = 'none';
+                btn3.style.display = 'none';
+            } else if (textNum == 2) {
+                btn1.style.display = 'none';
+                btn2.style.display = 'block';
+                btn3.style.display = 'none';
+            } else if (textNum == 3) {
+                if (currentPosition == 1) {
+                    if (lastPosition == 2) {
+                        tempText = text2;
+                        text2 = text1;
+                        text1 = tempText;
+                    } else if (lastPosition == 3) {
+                        tempText = text3;
+                        text3 = text1;
+                        text1 = tempText;
+                    }
+                } else if (currentPosition == 2) {
+                    if (lastPosition == 1) {
+                        tempText = text1;
+                        text1 = text2;
+                        text2 = tempText;
+                    } else if (lastPosition == 3) {
+                        tempText = text3;
+                        text3 = text2;
+                        text2 = tempText;
+                    }
+                } else if (currentPosition == 3) {
+                    if (lastPosition == 1) {
+                        tempText = text1;
+                        text1 = text3;
+                        text3 = tempText;
+                    } else if (lastPosition == 2) {
+                        tempText = text2;
+                        text2 = text3;
+                        text3 = tempText;
+                    }
+                }
+                btn1.style.display = 'none';
+                btn2.style.display = 'none';
+                btn3.style.display = 'block';
+            }
+            lastPosition = currentPosition; // 현재 위치를 마지막 위치로 업데이트
+            tempText = 0;
+                
+        }
+
+        const loginForm = document.getElementById("login-form");
+
+        //로그인 기능
+        document.getElementById('login_button').addEventListener("click", (event) => {    
+            event.preventDefault();
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
+            
+            if (username == "konic3" && password == 1234) {
+                alert("성공적으로 로그인 하였습니다.");
+
+                document.getElementById("login-form").style.display='none';
+                document.getElementById("logout-form").style.display='block';
+            } else {
+                location.reload();
+                alert("로그인에 실패하였습니다.");
+            } 
+        });
+    </script>
+</body>
+</html>
