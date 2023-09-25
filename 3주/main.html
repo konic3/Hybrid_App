@@ -17,7 +17,7 @@
             <form id="logout-form">
                 <img src="cat.jpg" alt="">
                 <b>konic3</b>
-                <input value="LOGOUT" type="submit" name="logout" id="login_button">
+                <input value="LOGOUT" type="submit" name="logout" id="logout_button">
             </form>
         </div>
         <div id="menu">
@@ -49,36 +49,39 @@
         var lastText;
         var lastPosition;
         var tempText;
+        var isLogin=false;
         var btn1 = document.getElementsByClassName("text")[0];
         var btn2 = document.getElementsByClassName("text")[1];
         var btn3 = document.getElementsByClassName("text")[2];
-        
-        function div1btn() {
-            showText(text1, 1);
-            lastText = text1;
-        }
-        
-        function div2btn() {
-            showText(text2, 2);
-            lastText = text2;
-        }
-        
-        function div3btn() {
-            showText(text3, 3);
-            lastText = text3;
-        }
+
+            function div1btn() {
+                showText(text1, 1);
+                lastText = text1;
+            }
+            
+            function div2btn() {
+                showText(text2, 2);
+                lastText = text2;
+            }
+            
+            function div3btn() {
+                showText(text3, 3);
+                lastText = text3;
+            }
         
         //버튼 교환 함수
         function showText(textNum, currentPosition) {
-            if (textNum == 1) {
-                btn1.style.display = 'block';
-                btn2.style.display = 'none';
-                btn3.style.display = 'none';
-            } else if (textNum == 2) {
-                btn1.style.display = 'none';
-                btn2.style.display = 'block';
-                btn3.style.display = 'none';
-            } else if (textNum == 3) {
+            if(isLogin==true){
+
+                if (textNum == 1) {
+                    btn1.style.display = 'block';
+                    btn2.style.display = 'none';
+                    btn3.style.display = 'none';
+                } else if (textNum == 2) {
+                    btn1.style.display = 'none';
+                    btn2.style.display = 'block';
+                    btn3.style.display = 'none';
+                } else if (textNum == 3) {
                 if (currentPosition == 1) {
                     if (lastPosition == 2) {
                         tempText = text2;
@@ -110,33 +113,45 @@
                         text3 = tempText;
                     }
                 }
-                btn1.style.display = 'none';
-                btn2.style.display = 'none';
-                btn3.style.display = 'block';
-            }
-            lastPosition = currentPosition; // 현재 위치를 마지막 위치로 업데이트
-            tempText = 0;
-                
+                    btn1.style.display = 'none';
+                    btn2.style.display = 'none';
+                    btn3.style.display = 'block';
+                }
+                lastPosition = currentPosition; // 현재 위치를 마지막 위치로 업데이트
+                tempText = 0;
+            }   
+            
         }
-
+        
         const loginForm = document.getElementById("login-form");
-
+        
         //로그인 기능
-        document.getElementById('login_button').addEventListener("click", (event) => {    
+        document.getElementById('login_button').addEventListener("click", () => {    
             event.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
             
             if (username == "konic3" && password == 1234) {
                 alert("성공적으로 로그인 하였습니다.");
-
+                isLogin=true;
                 document.getElementById("login-form").style.display='none';
                 document.getElementById("logout-form").style.display='block';
+                loginForm.username.value="";
+                loginForm.password.value="";
             } else {
                 location.reload();
                 alert("로그인에 실패하였습니다.");
             } 
         });
+
+        document.getElementById('logout_button').addEventListener("click",()=>{
+            event.preventDefault();
+            isLogin=true;
+
+            document.getElementById("login-form").style.display='block';
+            document.getElementById("logout-form").style.display='none';
+        });
+
     </script>
 </body>
 </html>
