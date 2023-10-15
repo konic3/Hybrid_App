@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btn1{
+            width: 200px;height: 100px; border: 2px solid black;
+        }
+    </style>
+    <script src="../server/server.js"></script>
+</head>
+<body>
+    <div id="total">
+        <button type="button" id="btn1"></button>
+        <p id="totaltext"></p>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 요청</title>
+    <script src="../server/server.js"></script>
+</head>
+<body>
+    <button id="getDataButton">데이터 가져오기</button>
+    <p id="responseData"></p>
+
+    <script type="module">
+        document.getElementById('getDataButton').addEventListener('click', async function() {
+            try {
+                const response = await fetch('http://localhost:3000/hi', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+                document.getElementById('responseData').textContent = data.message;
+            } catch (error) {
+                console.error('에러 발생: ' + error);
+            }
+        });
+    </script>
+</body>
+</html>
