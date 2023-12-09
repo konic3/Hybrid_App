@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "konic3",
+      "password": "1234",
+      "bestscore": 2648
+    },
+    {
+      "id": "123",
+      "password": "123",
+      "bestscore": 2088
+    },
+    {
+      "id": "3321",
+      "password": "3321",
+      "bestscore": 980
+    }
+  ]
+}
